@@ -7,7 +7,7 @@ import {
   } from "react-router-dom";
 
 import {COLORS} from '../constants';
-import Logo from '../assets/logo.svg';
+import {ReactComponent as Logo} from '../assets/logo.svg';
 
 import {AiOutlineHome as Home} from 'react-icons/ai';
 import {RiNotification2Line as Bell} from 'react-icons/ri';
@@ -58,7 +58,7 @@ const Ul = styled.ul`
           <nav>
             <Ul>
               <Li>
-              <img src={Logo} alt="logo"/>
+              <Logo/>
               </Li>
               <Li>
                 <Home size='30px'/>
