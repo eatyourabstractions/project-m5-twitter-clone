@@ -8,6 +8,8 @@ import {AiOutlineRetweet} from 'react-icons/ai';
 import {FaRegHeart} from 'react-icons/fa';
 import {BiUpload} from 'react-icons/bi'
 
+import LikeButton from './LikeButton/index'
+
 const TweetHeader = styled.div`
   display: flex;
   align-items: center;
@@ -21,6 +23,7 @@ const Name = styled.b`
 const Span = styled.span`
     margin-left: 85px;
     font-size: 30px;
+    display: block;
 `;
 
 const MyPhoto = styled.img`
@@ -59,29 +62,56 @@ const Retmeowed = styled.span`
   color: grey;
   margin-left: 85px;
 `;
-
-const Tweet = ({displayName, handle, date, avatar, photo, message, remowed}) => {
-    
+const postLikeOrUnliked = async (tweetID, isItOrNot) =>{
+  fetch(`api/tweet/${tweetID}/like`, {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin": "*",
+    },
+    body: JSON.stringify({like: isItOrNot})
+    })
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+}
+const Tweet = (props) => {
+  const {displayName,
+             handle,
+              date, 
+              avatar, 
+              photo, 
+              message, 
+              remowed,
+              id,
+              likedOrNot} = props
+    const [isLiked, setIsLiked] = useState(likedOrNot)
+    const toggleLikeBtn = () =>{
+      setIsLiked(!isLiked)
+      postLikeOrUnliked(id, !isLiked)
+    }
     
   return (
-  <TweetLayout>
-    {remowed && <Retmeowed><AiOutlineRetweet/>{`${remowed}, remowed`}</Retmeowed>}
+  <div style={{border:'1px solid lightgray', padding: '30px 0px 40px 5px'}} >
+    {remowed && <Retmeowed><AiOutlineRetweet/>{`${remowed} remowed`}</Retmeowed>}
     <TweetHeader>
       <Avatar src={avatar}/>
     <span><Name>{displayName}</Name><Info>{`${handle} - ${date}`}</Info></span>
   </TweetHeader>
-  <div>
+  <div >
   <Span>{message}</Span>
    {photo && <MyPhoto src={photo} />}
     <ButtonBar>
       <ImBubble2 size='30px'/>
       <AiOutlineRetweet size='30px'/>
-      <FaRegHeart size='30px'/>
+      <div onClick={toggleLikeBtn}>
+        <LikeButton isLiked={isLiked} />
+      </div>
       <BiUpload size='30px'/>
     </ButtonBar>
     </div>
-    <hr/>
-  </TweetLayout>
+    
+  </div>
 
 );
   };

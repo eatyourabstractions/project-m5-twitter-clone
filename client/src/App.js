@@ -13,6 +13,7 @@ import {CurrentUserContext} from './components/CurrentUserContext';
 
 const Layout = styled.div`
   display: flex;
+  
 `;
 
 const App = () => {

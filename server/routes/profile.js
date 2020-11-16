@@ -17,7 +17,7 @@ const {
 router.get('/api/me/profile', (req, res) => {
   const profile = getUserProfile(CURRENT_USER_HANDLE);
   
-  res.header("Access-Control-Allow-Origin", "*");
+  
   return simulateProblems(res, { profile });
 });
 

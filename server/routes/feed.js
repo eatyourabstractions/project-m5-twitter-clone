@@ -40,7 +40,7 @@ router.get('/api/me/home-feed', (req, res) => {
 
   const { tweetsById, tweetIds } = formatTweetResponse(relevantTweets);
 
-  res.header("Access-Control-Allow-Origin", "*");
+  
 
   return simulateProblems(res, {
     tweetsById,

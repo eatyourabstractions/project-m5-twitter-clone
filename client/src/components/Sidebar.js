@@ -61,23 +61,23 @@ const Ul = styled.ul`
               <Logo/>
               </Li>
               <Li>
-                <Home size='30px'/>
+                <Home size='25px'/>
                 <NavigationLink to="/"><b>HomeFeed</b></NavigationLink>
               </Li>
               <Li>
-                <Bell size='30px'/>
+                <Bell size='25px'/>
                 <NavigationLink to="/notifications"><b>notifications</b></NavigationLink>
               </Li>
               <Li>
-                <Bookmark size='30px'/>
+                <Bookmark size='25px'/>
                 <NavigationLink to="/bookmarks"><b>bookmarks</b></NavigationLink>
               </Li>
               <Li>
-                <Tweet size='30px'/>
+                <Tweet size='25px'/>
                 <NavigationLink to="/tweet/:tweetId"><b>tweetId</b>tweetId</NavigationLink>
               </Li>
               <Li>
-              <Person size='30px'/>
+              <Person size='25px'/>
                 <NavigationLink to="/:profileId"><b>:profileId</b></NavigationLink>
               </Li>
             </Ul>
