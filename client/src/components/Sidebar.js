@@ -62,7 +62,7 @@ const Ul = styled.ul`
               </Li>
               <Li>
                 <Home size='25px'/>
-                <NavigationLink to="/"><b>HomeFeed</b></NavigationLink>
+                <NavigationLink to="/"><b>Home</b></NavigationLink>
               </Li>
               <Li>
                 <Bell size='25px'/>
@@ -72,13 +72,13 @@ const Ul = styled.ul`
                 <Bookmark size='25px'/>
                 <NavigationLink to="/bookmarks"><b>bookmarks</b></NavigationLink>
               </Li>
-              <Li>
+              {/* <Li>
                 <Tweet size='25px'/>
                 <NavigationLink to="/tweet/:tweetId"><b>tweetId</b>tweetId</NavigationLink>
-              </Li>
+              </Li> */}
               <Li>
               <Person size='25px'/>
-                <NavigationLink to="/:profileId"><b>:profileId</b></NavigationLink>
+                <NavigationLink to="/:profileId"><b>profile</b></NavigationLink>
               </Li>
             </Ul>
           </nav>

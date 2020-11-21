@@ -16,6 +16,7 @@ const HomeFeed = () => {
   const [tweetsByIds, setTweetsByIds] = useState(false)
   const [theAvatar, setAvatar] = useState('')
   const [profile, setProfile] = useState({})
+  
 
   useEffect(() => {
     // GET request using fetch inside useEffect React hook
@@ -51,58 +52,65 @@ const ranId = (n) => [...Array(n)].map(() => Math.floor(Math.random() * 9)).join
       },
       body: JSON.stringify({status: cntnt})
       })
-      .then(res => res.json())
-      .then(res => {
+      .then(res => refreshPage())
+      // .then(res => res.json())
+      // .then(res => {
         
-        const myNewTweet = {
-          timestamp: res.tweet.timestamp,
-          author: {
-            displayName: profile.displayName,
-            handle: profile.handle,
-            avatarSrc: profile.avatarSrc
-          },
-          status: res.tweet.status,
-          media: [],
-          id: res.tweet.id,
-          isLiked: false,
-        }
-        console.log(myNewTweet)
-        // const newTweets = [...tweetIds]
-        // newTweets.unshift(res.tweet.id)
-        // setTweetIds(newTweets)
-        // const newObj = Object.assign({}, tweetsByIds);
-        // newObj[res.tweet.id] = myNewTweet;
-        // console.log('my new obj', newObj)
-        // setTweetsByIds(newObj)
-      })
+      //   const myNewTweet = {
+      //     timestamp: res.tweet.timestamp,
+      //     author: {
+      //       displayName: profile.displayName,
+      //       handle: profile.handle,
+      //       avatarSrc:validateUrl( profile.avatarSrc)
+      //     },
+      //     status: res.tweet.status,
+      //     media: [],
+      //     isLiked: false,
+      //     id: res.tweet.id,
+      //   }
+      //   // myNewTweet[res.tweet.id] = res.tweet.id
+      //    console.log(tweetsByIds)
+      //    const newTweets = [...tweetIds]
+      //    newTweets.unshift(`${res.tweet.id}`)
+      //    setTweetIds(newTweets)
+      //    const newObj = Object.assign({}, tweetsByIds);
+      //   newObj[res.tweet.id] = myNewTweet;
+      //   console.log('my new obj', newObj)
+      //    setTweetsByIds(newObj)
+      // })
       
   }
   
 
-  const throwTweet = async (tweetContent) =>{
-    // optimistic update
-    const newId = ranId(12)
-    const newTweetById = {
-     timestamp: moment().format(),
-     status: tweetContent,
-     author: {
-      displayName: profile.displayName,
-      handle: profile.handle,
-      avatarSrc: profile.avatarSrc,
-    },
-     media: []}
-     newTweetById[newId] = newId;
-     const newTweets = [...tweetIds]
-     newTweets.unshift(newId)
-     setTweetIds(newTweets)
-     const newObj = Object.assign({}, tweetsByIds);
-     newObj[newId] = newTweetById;
-     setTweetsByIds(newObj)
+  // const throwTweet = async (tweetContent) =>{
+  //   // optimistic update
+  //   const newId = ranId(12)
+  //   const newTweetById = {
+  //    timestamp: moment().format(),
+  //    status: tweetContent,
+  //    author: {
+  //     displayName: profile.displayName,
+  //     handle: profile.handle,
+  //     avatarSrc: profile.avatarSrc,
+  //   },
+  //    media: []}
+  //    newTweetById[newId] = newId;
+  //    const newTweets = [...tweetIds]
+  //    newTweets.unshift(newId)
+  //    //setTweetIds(newTweets)
+  //    const newObj = Object.assign({}, tweetsByIds);
+  //    newObj[newId] = newTweetById;
+  //    //setTweetsByIds(newObj)
      
-     //POST the data
-    postTweet(tweetContent)
+  //    //POST the data
+  //   postTweet(tweetContent)
+  //   refreshPage()
 
      
+  // }
+
+  function refreshPage() {
+    window.location.reload(false);
   }
   
 
@@ -150,8 +158,8 @@ const TweetLayout = styled.div`
 
     return (
     <TweetLayout>
-      <TweetTextArea avatar={theAvatar} makeTweet={throwTweet}/>
-      <Ul>{tweetsByIds && genTweetList()}</Ul>
+      <TweetTextArea avatar={theAvatar} makeTweet={postTweet}/>
+      <Ul>{ tweetsByIds && genTweetList()}</Ul>
     </TweetLayout>
     );
   };
